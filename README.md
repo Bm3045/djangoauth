@@ -23,32 +23,8 @@ This Django application enables users to sign up and log in as different user ty
    ```bash
    git clone https://github.com/Bm3045/djangoauth.git
    cd djangoauth
-Create and activate a virtual environment:
 
-bash
-Copy
-Edit
-python -m venv env
+2. Create and activate a virtual environment:
+   python -m venv env
 source env/bin/activate       # On Windows: env\Scripts\activate
-Install dependencies:
-
-bash
-Copy
-Edit
-pip install -r requirements.txt
-Apply migrations:
-
-bash
-Copy
-Edit
-python manage.py migrate
-Run the development server:
-
-bash
-Copy
-Edit
-python manage.py runserver
-Access the app:
-
-Open http://127.0.0.1:8000/signup/ to create an account.
 
