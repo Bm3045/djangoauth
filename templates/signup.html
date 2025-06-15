@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .signup-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        form label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+
+        form input, form select, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .toggle-icon {
+            position: absolute;
+            top: 38px;
+            right: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .login-link {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .errorlist {
+            color: red;
+            margin: 5px 0 0 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-box">
+        <h2>Create Account</h2>
+        <form method="POST" enctype="multipart/form-data" onsubmit="return validatePassword();">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Sign Up</button>
+        </form>
+        <div class="login-link">
+            Already have an account? <a href="{% url 'login' %}">Login</a>
+        </div>
+    </div>
+
+    <script>
+        function validatePassword() {
+            const password1 = document.getElementById("id_password1");
+            const password2 = document.getElementById("id_password2");
+
+            if (password1 && password2 && password1.value !== password2.value) {
+                alert("Passwords do not match!");
+                return false;
+            }
+            return true;
+        }
+
+        // Toggle password visibility (if desired, you can add icons)
+        document.addEventListener("DOMContentLoaded", () => {
+            const passwordFields = ["id_password1", "id_password2"];
+            passwordFields.forEach(id => {
+                const field = document.getElementById(id);
+                if (field) {
+                    const toggle = document.createElement("span");
+                    toggle.textContent = "👁";
+                    toggle.classList.add("toggle-icon");
+                    toggle.onclick = () => {
+                        field.type = field.type === "password" ? "text" : "password";
+                    };
+                    field.parentNode.style.position = "relative";
+                    field.parentNode.appendChild(toggle);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
